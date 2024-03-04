@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>About Us</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
@@ -19,27 +19,17 @@
                     <button type="submit">Search</button>
                 </form>
             </div>
+            <div class="nav-box login-link">
+                <a href="{% url 'GameDB:login' %}">Login</a>
+            </div>
             <div class="nav-box account-link">
                 <a href="/account/">My Account</a>
             </div>
         </nav>
     </header>
     <main>
-        <div class="login-container">
-            <form action="/login/" method="post">
-                {% csrf_token %}
-                <input type="text" name="username" placeholder="User" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="submit" value="Login">
-                <button type="button" onclick="location.href='/register/'">Create new account</button>
-            </form>
-        </div>
+        <h1>About Us</h1>
+        <p>This is the About Us page. Here you can find information about our company.</p>
     </main>
-    <footer>
-        <a href="{% url 'GameDB:about_us' %}">About</a>
-    </footer>
-    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
-
-

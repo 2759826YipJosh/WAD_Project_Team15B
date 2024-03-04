@@ -25,5 +25,8 @@ def register_view(request):
 def index(request):
     return render(request, 'index.html')
 
+def about_us_view(request):
+    return render(request, 'about_us.html')
+
 
 
