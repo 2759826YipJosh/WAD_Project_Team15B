@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="nav-box home-link">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-box account-link">
+                <a href="/account/">My Account</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="login-container">
+            <form action="/login/" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="User" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+                <button type="button" onclick="location.href='/register/'">Create new account</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <a href="#">About</a>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
+

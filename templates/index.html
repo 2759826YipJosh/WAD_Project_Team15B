@@ -1,0 +1,30 @@
+<!-- THIS IS NOT THE ACTUAL HOME PAGE, 
+I MADE THIS JUST TO TEST THE LOGIN PAGE WAS WORKING
+WHEN JIAYU FINISHES THE HOME PAGE HE SHOULD REPLACE THE CODE IN HERE WITH HIS HOME PAGE CODE 
+MAKE SURE TO ALSO EDIT VIEWS.PY , SETTINGS.PY, URLS.PY ... ETC ACCORDINGLY -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>GameDB</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'GameDB:login' %}">Login</a></li>
+                <!-- You can add more navigation links here -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>This is the homepage of the website. Click on the login link above to sign in.</p>
+    </main>
+    
+</body>
+</html>
