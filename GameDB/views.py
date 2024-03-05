@@ -10,8 +10,8 @@ def home(request):
     
     return render(request, "home.html", {'username': username})
 
-def about(request):
-    return HttpResponse("This is the about page.")
+#def about(request):
+ #   return HttpResponse("This is the about page.")
     # return render(request, "02.html")
 
 def user_login(request):
@@ -51,3 +51,6 @@ def categories(request):
 
 def coming_soon(request):
     return HttpResponse("This is the Coming soon page.")
+
+def about_us(request):
+    return render(request, 'about_us.html')

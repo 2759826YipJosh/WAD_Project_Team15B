@@ -11,7 +11,13 @@
     <header>
         <nav class="navigation">
             <div class="nav-box home-link">
-                <a href="/">Home</a>
+                <a href="/">GameDB</a>
+            </div>
+            <div class="search-bar">
+                <!-- NEED TO ADD A SEARCH VIEW HERE , THE SEARCH BAR CURRENTLY DOES NOT DO ANYTHING -->
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>
             </div>
             <div class="nav-box account-link">
                 <a href="/account/">My Account</a>
@@ -30,9 +36,10 @@
         </div>
     </main>
     <footer>
-        <a href="#">About</a>
+        <a href="/about-us/">About Us</a>
     </footer>
-    <script src="scripts.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
+
 

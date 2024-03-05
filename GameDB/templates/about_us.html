@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
@@ -20,7 +20,7 @@
                 </form>
             </div>
             <div class="nav-box login-link">
-                <a href="{% url 'GameDB:login' %}">Login</a>
+                <a href="/login/">Login</a>
             </div>
             <div class="nav-box account-link">
                 <a href="/account/">My Account</a>
