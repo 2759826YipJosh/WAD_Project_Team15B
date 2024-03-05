@@ -10,10 +10,6 @@ def home(request):
     
     return render(request, "home.html", {'username': username})
 
-#def about(request):
- #   return HttpResponse("This is the about page.")
-    # return render(request, "02.html")
-
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
