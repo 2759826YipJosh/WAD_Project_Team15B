@@ -1,11 +1,21 @@
 from django.urls import path
-from GameDB import views
 
-app_name = 'GameDB'
+from . import views
 
 urlpatterns = [
-path('', views.index, name='index'),
-path('login/', views.login_view, name='login'),
-path('register/', views.register_view, name='register'),
-path('about-us/', views.about_us_view, name='about_us'),
+    path("", views.home),
+
+    path("about/", views.about),
+
+    path("login/", views.user_login),
+
+    path("register/", views.register),
+
+    path("account/", views.account),
+
+    path("search/", views.search),
+
+    path("categories/", views.categories),
+
+    path("comingsoon/", views.coming_soon)
 ]

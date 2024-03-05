@@ -1,9 +1,20 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 
+# Create your views here.
 
 
-def login_view(request):
+def home(request):
+    username = request.user.username
+    
+    return render(request, "home.html", {'username': username})
+
+def about(request):
+    return HttpResponse("This is the about page.")
+    # return render(request, "02.html")
+
+def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -17,16 +28,26 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Invalid login'})
     else:
         return render(request, 'login.html')
+    
 
-def register_view(request):
-    # registration logic here
-    pass
+def register(request):
+    return HttpResponse("This is the register page.")
+    # return render(request, "04.html")
 
-def index(request):
-    return render(request, 'index.html')
+def account(request):
+    return HttpResponse("This is the account page.")
+    # return render(request, "05.html")
 
-def about_us_view(request):
-    return render(request, 'about_us.html')
+def search(request):
+    search_kw = request.GET.get('kw')
+    if search_kw:
+        return HttpResponse(f"Search for: {search_kw}")
+    else:
+        return redirect("/")
+    # return render(request, "06.html")
 
+def categories(request):
+    return HttpResponse("This is the categories page.")
 
-
+def coming_soon(request):
+    return HttpResponse("This is the Coming soon page.")
