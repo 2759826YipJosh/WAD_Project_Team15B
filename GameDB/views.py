@@ -46,7 +46,7 @@ def categories(request):
     return HttpResponse("This is the categories page.")
 
 def coming_soon(request):
-    return HttpResponse("This is the Coming soon page.")
+    return render(request, 'coming_soon.html')
 
 def about_us(request):
     return render(request, 'about_us.html')
