@@ -15,15 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.urls import include
-from GameDB import views
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('GameDB/', include('GameDB.urls')),
-    # The above maps any URLs starting with GameDB/ to be handled by rango.
+    path('', include('GameDB.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_DIR)

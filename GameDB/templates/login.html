@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>Login Page</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
@@ -13,14 +13,13 @@
             <div class="nav-box home-link">
                 <a href="/">GameDB</a>
             </div>
+            
             <div class="search-bar">
                 <!-- NEED TO ADD A SEARCH VIEW HERE , THE SEARCH BAR CURRENTLY DOES NOT DO ANYTHING -->
+                
                     <input type="text" name="query" placeholder="Search...">
                     <button type="submit">Search</button>
                 </form>
-            </div>
-            <div class="nav-box login-link">
-                <a href="{% url 'GameDB:login' %}">Login</a>
             </div>
             <div class="nav-box account-link">
                 <a href="/account/">My Account</a>
@@ -28,8 +27,22 @@
         </nav>
     </header>
     <main>
-        <h1>About Us</h1>
-        <p>This is the About Us page. Here you can find information about our company.</p>
+        <div class="login-container">
+            <form action="/login/" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="User" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+                <!-- CHANGED LINE BELOW TO LINK TO REGISTER  -->
+                <button type="button" onclick="location.href='/GameDB/register/'">Create new account</button>
+            </form>
+        </div>
     </main>
+    <footer>
+        <a href="/about-us/">About Us</a>
+    </footer>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
+
+
