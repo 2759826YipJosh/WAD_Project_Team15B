@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Categories</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="nav-box home-link">
+                <a href="/">GameDB</a>
+            </div>
+            <div class="search-bar">
+                <!-- NEED TO ADD A SEARCH VIEW HERE , THE SEARCH BAR CURRENTLY DOES NOT DO ANYTHING -->
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="nav-box login-link">
+                <a href="/login/">Login</a>
+            </div>
+            <div class="nav-box account-link">
+                <a href="/account/">My Account</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+<div class="container">
+        <h1>Popular Categories</h1>
+        <p>Browse the most popular video game categories.</p>
+    
+    
+    <!-- FPS -->
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <a href="" class="text-white btn btn-dark btn-lg">FPS</a>
+        </div>
+        
+    </div>
+
+    <!-- THERE TITLES OF EACH GAME ARE NOT LINKS AT THE MOMENT, ONCE RYAN GETS THE SEARCH DONE WE CAN MAKE THESE TITLES INTO LINKS SO 
+         WHEN YOU CLICK ON A GAME IT DISPLAYS THE GAMES INFO-->
+
+    <div class="row mt-3">
+        
+        <div class="col-md-4" id="pc1">
+            
+            <img src="{% static 'images/COD.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">Call Of Duty Modern Warfare 3</h1>
+                          
+        </div>
+
+        <div class="col-md-4">
+            <img src="{% static 'images/BF2024.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">Battefield 2042</h1>
+            
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/halo.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">Halo Infinite</h1>
+            
+        </div>
+        
+    </div>
+
+    <!-- RPG -->
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <a href="" class="text-white btn btn-dark btn-lg">RPG</a>
+        </div>
+        
+    </div>
+
+    <div class="row mt-3">
+        
+        <div class="col-md-4">
+            <img src="{% static 'images/gta5v2.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">GTA 5</h1>
+                          
+        </div>
+
+        <div class="col-md-4">
+            <img src="{% static 'images/rd2.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">Red Dead Redemption 2</h1>
+            
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/assassinscreed.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">Assassin's Creed Odyssey</h1>
+            
+        </div>
+        
+    </div>
+
+    <!-- Sport -->
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <a href="" class="text-white btn btn-dark btn-lg">Sport</a>
+        </div>
+        
+    </div>
+
+    <div class="row mt-3">
+        
+        <div class="col-md-4">
+            <img src="{% static 'images/EA.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">EA FC 24</h1>
+                          
+        </div>
+
+        <div class="col-md-4">
+            <img src="{% static 'images/nba.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">NBA 2K24</h1>
+            
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/f123.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+            <h1 class="display-6 text-center">F1 23</h1>
+            
+        </div>
+        
+    </div>
+    
+</div>
+</main> 
+
+<script src="{% static 'js/axios.min.js' %}"></script>
+<script src="{% static 'js/home.js' %}?{% now 'U' %}"></script>
+</body>
+</html>

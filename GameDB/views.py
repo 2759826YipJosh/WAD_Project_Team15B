@@ -81,7 +81,7 @@ def search(request):
     # return render(request, "06.html")
 
 def categories(request):
-    return HttpResponse("This is the categories page.")
+    return render(request, 'categories.html')
 
 def coming_soon(request):
     return render(request, 'coming_soon.html')
