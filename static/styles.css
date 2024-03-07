@@ -35,9 +35,32 @@ header .navigation .nav-box a {
     border-radius: 8px;
 }
 
+
+.register-container {
+    background-color: white;
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+/* ADDED REGISTER CONTAINER BUT DOESNT WORK */
+
+
+
+
+
+
+
+
+
+
 form input[type="text"],
 form input[type="password"],
 form input[type="submit"],
+form input[type="confirm_password"],
+/* confirm password is added - J */
+
 form button {
     margin: 10px 0;
     width: calc(100% - 20px);
