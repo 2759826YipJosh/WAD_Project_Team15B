@@ -23,11 +23,6 @@
                         <button class="btn btn-primary" type="button" id="search_button">Search</button>
                     </form>
                     <ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/register/">Register</a>
-                        </li>
-=======
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="/account/">My Account</a>
@@ -43,7 +38,6 @@
                                 <a class="nav-link text-white" href="/register/">Register</a>
                             </li>
                         {% endif %}
->>>>>>> 89852266ee43d817ae8d873f43f6c8a78638162f
                     </ul>
                 </div>
             </div>
