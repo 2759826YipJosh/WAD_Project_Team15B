@@ -11,11 +11,13 @@ urlpatterns = [
     
     path("login/register/", views.register, name='register'),
     
+    path('home/login/register/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    
+    path('home/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    
     path("register/", views.register, name='register'),
     
     path('register/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    
-    path('account/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 
     path("account/", views.account,  name='account'),
 
@@ -26,4 +28,6 @@ urlpatterns = [
     path("comingsoon/", views.coming_soon),
 
     path("about-us/", views.about_us),
+    
+    path("home/", views.home),
 ]

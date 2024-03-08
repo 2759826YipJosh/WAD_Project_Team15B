@@ -37,9 +37,7 @@ def register(request):
         user_form = UserCreationForm(request.POST)
         profile_form = UserProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
+            user = user_form.save()  # Password is hashed here
             profile = profile_form.save(commit=False)
             profile.user = user
             if 'picture' in request.FILES:
@@ -56,6 +54,7 @@ def register(request):
                   context = {'user_form': user_form, 
                              'profile_form': profile_form, 
                              'registered': registered})
+
 
 def account(request):
     return render(request, 'account.html')
