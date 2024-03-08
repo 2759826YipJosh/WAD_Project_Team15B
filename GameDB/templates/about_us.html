@@ -23,15 +23,34 @@
                         <button class="btn btn-primary" type="button" id="search_button">Search</button>
                     </form>
                     <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/register/">Register</a>
                         </li>
+=======
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/account/">My Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/logout/">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/login/">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/register/">Register</a>
+                            </li>
+                        {% endif %}
+>>>>>>> 89852266ee43d817ae8d873f43f6c8a78638162f
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <main>
+
         <div class="container">
             <h1>About Us</h1>
             <p>This is the About Us page. Here you can find information on each of the team members.</p>
@@ -93,7 +112,7 @@
                     <p> Age: 19</p>
                     <p> Email: 2767195D@student.gla.ac.uk</p>
                     <p> Degree: Electronic and Software Engineering</p>
-                    <p> About me: TBC </p>
+                    <p> About me:I'm Krish, from India, doing ESE 2nd year and part time robotics cause thats fun!</p>
                     <p> Job: Creating the functionality of the admin and reviewing features.</p>
                 </div>
             </div>
