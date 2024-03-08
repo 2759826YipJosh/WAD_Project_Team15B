@@ -12,7 +12,7 @@ from GameDB.models import UserProfile
 # Register your models here.
 
 from django.contrib import admin
-from GameDB.models import Category, Page
+from GameDB.models import Category, Page, Game, Review
 
 
 class PageAdmin(admin.ModelAdmin):
@@ -31,3 +31,5 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Page, PageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Game)
+admin.site.register(Review)

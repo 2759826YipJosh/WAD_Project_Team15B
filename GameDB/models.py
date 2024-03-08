@@ -24,7 +24,9 @@ class UserProfile(models.Model):
     
     
 class Category(models.Model):
-    NAME_MAX_LENGTH = 128
+    NAME_MAX_LENGTH = 20
+    
+    #Need to remove views and likes, uneccessary - Ryan
     
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
     views = models.IntegerField(default=0)
@@ -34,6 +36,9 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name 
 
 class Meta:
     verbose_name_plural = 'categories'
@@ -51,5 +56,38 @@ class Page(models.Model):
     url = models.URLField()
     views = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
+class Game(models.Model):
+    
+    #idk why this gameID works? I dont think it does we need to look at it - Ryan
+    gameID = models.AutoField(primary_key=True)
+    gameTitle = models.CharField(max_length=60)
+    releaseDate = models.DateField()
+    #Don't edit these foreign keys once active will break admin page - Ryan
+    #categoryName = models.ForeignKey(Category, on_delete=models.CASCADE)
+    platform = models.CharField(max_length=20)
+    developer = models.CharField(max_length=30)
+    publisher = models.CharField(max_length=30)
+    avgRating = models.FloatField()
+    ageRating = models.CharField(max_length=4)
+    multiplayer = models.BooleanField()
+    avgCompTime = models.TimeField()
+    
+    def __str__(self):
+        return self.gameTitle
+
+class Review(models.Model):
+    #doesn't work - Ryan
+    #reviewID = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=30)
+    ratingNum = models.IntegerField()
+    reviewText = models.CharField(max_length=1000)
+    #Don't edit these foreign keys once active will break admin page - Ryan
+    #username = models.ForeignKey(User.username)
+    #gameTitle = models.ForeignKey(Game.gameTitle)
+    #gameID = models.ForeignKey(Game.gameID)
+    
     def __str__(self):
         return self.title
