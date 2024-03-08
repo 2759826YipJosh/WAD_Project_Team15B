@@ -5,41 +5,80 @@
     <title>My Account</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-    <header>
-        
-    </header>
-    <main>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="mb-0">My Account</h3>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand text-white">GameDB</a>
+            <a href="/about-us/" class="navbar-brand text-white">About Us</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <form class="d-flex m-auto">
+                    <input class="form-control me-2" type="text" placeholder="Search" id="search_input">
+                    <button class="btn btn-primary" type="button" id="search_button">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="logout/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">My Account</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="mb-1"><strong>Username:</strong></label>
+                            <p id="username">{{ user.username }}</p>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="mb-1"><strong>Username:</strong></label>
-                                <p>{{ user.username }}</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="mb-1"><strong>Email:</strong></label>
-                                <p>{{ user.email }}</p>
-                            </div>
-                            <div class="form-group">
-                                <a href="/account/update/" class="btn btn-primary">Update Profile</a>
-                                <a href="/account/password/" class="btn btn-secondary">Change Password</a>
-                            </div>
+                        <div class="form-group">
+                            <label class="mb-1"><strong>Email:</strong></label>
+                            <p id="email">{{ user.email }}</p>
+                        </div>
+                        <div class="form-group">
+                            <button id="update-profile-button" class="btn btn-primary">Update Profile</button>
+                            <button id="change-password-button" class="btn btn-secondary">Change Password</button>
+                        </div>
+
+                        <!-- Update Profile Form -->
+                        <div id="update-profile-form" style="display: none;">
+                            <h4>Update Profile</h4>
+                            <form method="post" action="/account/update/">
+                                {% csrf_token %}
+                                <input type="text" id="new-username" name="new-username" placeholder="New Username">
+                                <input type="email" id="new-email" name="new-email" placeholder="New Email">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                        <!-- Change Password Form -->
+                        <div id="change-password-form" style="display: none;">
+                            <h4>Change Password</h4>
+                            <form method="post" action="/account/password/">
+                                {% csrf_token %}
+                                <input type="password" id="old-password" name="old-password" placeholder="Old Password">
+                                <input type="password" id="new-password" name="new-password" placeholder="New Password">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <footer>
-        <!-- Your footer here -->
-    </footer>
-    <script src="{% static 'scripts.js' %}"></script>
+    </div>
+
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/account.js' %}?{% now 'U' %}"></script>
 </body>
 </html>
