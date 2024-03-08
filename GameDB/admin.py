@@ -1,35 +1,31 @@
 from django.contrib import admin
+from GameDB.models import UserProfile, Category, Page, Game, Review
 
-# Register your models here.
+class GameAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Only superusers (admins) can add games
+        return request.user.is_superuser
 
-
-
-#CODE RIPPED FROM TANGO_WITH_DJANGO - J
-
-from django.contrib import admin
-from GameDB.models import UserProfile
-
-# Register your models here.
-
-from django.contrib import admin
-from GameDB.models import Category, Page, Game, Review
-
-
-class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'url')
-    
-    
-...
-# Add in this class to customise the Admin Interface
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('name',)}
-    # Update the registration to include this customised interface
+    def has_add_permission(self, request):
+        # Only superusers (admins) can add categories
+        return request.user.is_superuser
 
+class ReviewAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        # Only superusers (admins) can delete reviews
+        return request.user.is_superuser
 
+class UserProfileAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        # Only superusers (admins) can view user profiles
+        if request.user.is_superuser:
+            return UserProfile.objects.all()
+        else:
+            return UserProfile.objects.none()
 
-
-admin.site.register(Page, PageAdmin)
+admin.site.register(Game, GameAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(UserProfile)
-admin.site.register(Game)
-admin.site.register(Review)
+admin.site.register(Review, ReviewAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Page)

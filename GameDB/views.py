@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
-from GameDB.forms import UserForm, UserProfileForm
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+from GameDB.forms import UserProfileForm
 
 
 
@@ -30,47 +31,34 @@ def user_login(request):
     
 
 
-
-#REGISTER CODE RIPPED FROM TANGO WITH DJANGO
 def register(request):
-    # registration logic here
     registered = False
-
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
+        user_form = UserCreationForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-
             user.set_password(user.password)
             user.save()
-
             profile = profile_form.save(commit=False)
             profile.user = user
-
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-
             profile.save()
-
             registered = True
+            return redirect('login')  # Redirect to login page after successful registration
         else:
             print(user_form.errors, profile_form.errors)
     else:
-
-        user_form = UserForm()
+        user_form = UserCreationForm()
         profile_form = UserProfileForm()
-
     return render(request, 'register.html', 
                   context = {'user_form': user_form, 
                              'profile_form': profile_form, 
                              'registered': registered})
-    
 
 def account(request):
-    return HttpResponse("This is the account page.")
-    # return render(request, "05.html")
+    return render(request, 'account.html')
 
 def search(request):
     search_kw = request.GET.get('kw')
@@ -88,3 +76,7 @@ def coming_soon(request):
 
 def about_us(request):
     return render(request, 'about_us.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
