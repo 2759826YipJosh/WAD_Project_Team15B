@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Search Results</h1>
+        {% for result in results.webPages.value %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ result.name }}</h5>
+                    <p class="card-text">{{ result.snippet }}</p>
+                    <a href="{{ result.url }}" class="btn btn-primary" target="_blank">Go to page</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No results found.</p>
+        {% endfor %}
+    </div>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
