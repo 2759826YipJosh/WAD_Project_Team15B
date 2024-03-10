@@ -30,4 +30,6 @@ urlpatterns = [
     path("about-us/", views.about_us),
     
     path("home/", views.home),
+
+    path('chosen_game/', views.chosen_game)
 ]

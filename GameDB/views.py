@@ -79,3 +79,6 @@ def about_us(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def chosen_game(request):
+    return render(request, 'chosen_game.html')

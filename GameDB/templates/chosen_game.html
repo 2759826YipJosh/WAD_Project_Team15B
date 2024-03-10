@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chosen Game{% endblock title %}
+
+{% block content %}
+<div class="container  mt-5">
+    <div class="row mx-auto" style="height: 500px;">
+        <div class="col-md-9">
+            <video controls autoplay loop muted class="d-block w-100" style="height: 500px;">
+                <source src="{% static 'videos/deadcells.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+        <div class="col-md-3">
+            <img src="{% static 'images/deadcells.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 500px;">
+        </div>
+    </div>
+        
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto bg-dark text-white">
+            <p>
+                Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
+                <br>To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
+            </p>
+                
+            
+        </div>
+        
+    </div>
+
+</div>
+
+{% endblock %}
