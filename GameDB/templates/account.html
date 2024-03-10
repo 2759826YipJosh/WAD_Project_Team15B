@@ -23,7 +23,7 @@
                 </form>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="login/">Logout</a>
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -65,8 +65,9 @@
                         <!-- Change Password Form -->
                         <div id="change-password-form" style="display: none;">
                             <h4>Change Password</h4>
-                            <form method="post" action="/account/password/">
+                            <form method="post" action="{% url 'update_account' %}">
                                 {% csrf_token %}
+                                {{ form.as_p }}
                                 <input type="password" id="old-password" name="old-password" placeholder="Old Password">
                                 <input type="password" id="new-password" name="new-password" placeholder="New Password">
                                 <button type="submit" class="btn btn-primary">Submit</button>

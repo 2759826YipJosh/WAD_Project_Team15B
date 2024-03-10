@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.forms import UserCreationForm
-from GameDB.forms import UserProfileForm
+from .forms import RegisterForm, UpdateAccountForm
+from django.contrib import messages
 
-
-
-# Create your views here.
 
 
 def home(request):
@@ -22,7 +19,7 @@ def user_login(request):
         if user is not None:
             login(request, user)
             # Redirect to a success page.
-            return redirect('some-view-name')
+            return redirect('home')  # Replace 'home' with the name of your home view
         else:
             # Return an 'invalid login' error message.
             return render(request, 'login.html', {'error': 'Invalid login'})
@@ -30,34 +27,33 @@ def user_login(request):
         return render(request, 'login.html')
     
 
-
 def register(request):
-    registered = False
     if request.method == 'POST':
-        user_form = UserCreationForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()  # Password is hashed here
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
-            return redirect('login')  # Redirect to login page after successful registration
-        else:
-            print(user_form.errors, profile_form.errors)
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            return redirect('login')  # Redirect to a login page
     else:
-        user_form = UserCreationForm()
-        profile_form = UserProfileForm()
-    return render(request, 'register.html', 
-                  context = {'user_form': user_form, 
-                             'profile_form': profile_form, 
-                             'registered': registered})
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
+def update_account(request):
+    if request.method == 'POST':
+        form = UpdateAccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been updated.')
+            return redirect('account')
+    else:
+        form = UpdateAccountForm(instance=request.user)
+    return render(request, 'account.html', {'form': form})
 
 def account(request):
-    return render(request, 'account.html')
+    form = UpdateAccountForm(instance=request.user)
+    return render(request, 'account.html', {'form': form})
+
 
 def search(request):
     search_kw = request.GET.get('kw')
@@ -68,7 +64,18 @@ def search(request):
     # return render(request, "06.html")
 
 def categories(request):
-    return render(request, 'categories.html')
+    if request.method == 'POST' and request.user.is_superuser:
+        category_form = AddCategoryForm(request.POST)
+        game_form = AddGameForm(request.POST)
+        if category_form.is_valid():
+            category_form.save()
+        if game_form.is_valid():
+            game_form.save()
+        return redirect('categories')
+    else:
+        category_form = AddCategoryForm()
+        game_form = AddGameForm()
+    return render(request, 'categories.html', {'category_form': category_form, 'game_form': game_form})
 
 def coming_soon(request):
     return render(request, 'coming_soon.html')
