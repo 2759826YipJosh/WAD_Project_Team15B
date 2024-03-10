@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import logout, authenticate, login
 from .forms import RegisterForm, UpdateAccountForm
 from django.contrib import messages
+from .models import Game, Review
 
 
 
@@ -87,5 +88,13 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-def chosen_game(request):
-    return render(request, 'chosen_game.html')
+def chosen_game(request, gameID):
+    # game = Game.objects.get(pk=gameID)
+    game = {'videoName': 'deadcells.mp4', 
+            'pictureName': 'deadcells.jpg', 
+            'description': """
+                Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
+                To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
+            """}
+    game['description'] = game['description'].splitlines()
+    return render(request, 'chosen_game.html', {'game': game})

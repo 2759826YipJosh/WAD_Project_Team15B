@@ -55,6 +55,10 @@ class Game(models.Model):
     ageRating = models.CharField(max_length=4)
     multiplayer = models.BooleanField()
     avgCompTime = models.TimeField()
+
+    videoName = models.CharField(max_length=30, null=True, blank=True, unique=True)
+    pictureName = models.CharField(max_length=30, null=True, blank=True, unique=True)
+    description = models.CharField(max_length=1000, null=True, blank=True, unique=True)
     
     def __str__(self):
         return self.gameTitle
