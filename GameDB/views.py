@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, UpdateAccountForm
 from django.contrib import messages
 from .models import Game, Review
@@ -98,3 +99,9 @@ def chosen_game(request, gameID):
             """}
     game['description'] = game['description'].splitlines()
     return render(request, 'chosen_game.html', {'game': game})
+
+
+def check_login(request):
+    if request.user.username:
+        return JsonResponse({'logged_in': True})
+    return JsonResponse({'logged_in': False})

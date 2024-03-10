@@ -26,6 +26,16 @@
         
     </div>
 
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-outline-secondary " id="add-review-btn">Add Review</button>
+        </div>
+    </div>
+    <div class="row mt-4" id="alert-div-located"></div>
+
 </div>
+
+<script src="{% static 'js/axios.min.js' %}"></script>
+<script src="{% static 'js/chosen_game.js' %}?{% now 'U' %}"></script>
 
 {% endblock %}

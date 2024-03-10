@@ -48,4 +48,6 @@ urlpatterns = [
     path('chosen_game/<int:gameID>', views.chosen_game),
     
     path('account/update/', views.update_account, name='update_account'),
+
+    path('check_login/', views.check_login)
 ]
