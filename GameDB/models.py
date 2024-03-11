@@ -14,8 +14,6 @@ class UserProfile(models.Model):
 class Category(models.Model):
     NAME_MAX_LENGTH = 20
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -42,8 +40,6 @@ class Page(models.Model):
 
 class Game(models.Model):
     
-    #idk why this gameID works? I dont think it does we need to look at it - Ryan
-    gameID = models.AutoField(primary_key=True)
     gameTitle = models.CharField(max_length=60)
     releaseDate = models.DateField()
     #Don't edit these foreign keys once active will break admin page - Ryan
@@ -55,13 +51,16 @@ class Game(models.Model):
     ageRating = models.CharField(max_length=4)
     multiplayer = models.BooleanField()
     avgCompTime = models.TimeField()
+
+    videoName = models.CharField(max_length=30, null=True, blank=True, unique=True)
+    pictureName = models.CharField(max_length=30, null=True, blank=True, unique=True)
+    description = models.CharField(max_length=1000, null=True, blank=True, unique=True)
     
     def __str__(self):
         return self.gameTitle
 
 class Review(models.Model):
-    #doesn't work - Ryan
-    #reviewID = models.AutoField(primary_key=True)
+
     title = models.CharField(max_length=30)
     ratingNum = models.IntegerField()
     reviewText = models.CharField(max_length=1000)

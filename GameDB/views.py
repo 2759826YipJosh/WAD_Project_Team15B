@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, UpdateAccountForm
 from django.contrib import messages
+from .models import Game, Review
 
 
 
@@ -55,13 +57,15 @@ def account(request):
     return render(request, 'account.html', {'form': form})
 
 
-def search(request):
-    search_kw = request.GET.get('kw')
-    if search_kw:
-        return HttpResponse(f"Search for: {search_kw}")
+def search_results(request):    
+    #search_kw = request.GET.get('kw')
+    if request.method == "POST":
+        searched = request.POST['searched']
+        return render(request, "search_results.html", {'searched': searched}) #HttpResponse(f"Search for: {search_kw}")
     else:
-        return redirect("/")
-    # return render(request, "06.html")
+        #this is currently always being called no matter the input
+        return render(request, "search_results.html") #redirect("/")
+    
 
 def categories(request):
     if request.method == 'POST' and request.user.is_superuser:
@@ -86,3 +90,30 @@ def about_us(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def chosen_game(request, gameTitle):
+    # game = Game.objects.get(pk=gameID)
+    game = {'videoName': 'deadcells.mp4', 
+            'pictureName': 'deadcells.jpg', 
+            'description': """
+                Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
+                To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
+            """}
+    game['description'] = game['description'].splitlines()
+    username = request.user.username
+
+    if request.method == 'POST':
+        review_content = request.POST.get('review-content')
+        print(review_content)
+        # Review.objects.create(reviewText=review_content, game=game, user=request.user) 
+
+    return render(request, 'chosen_game.html', {'game': game, 'username': username})
+    
+    
+
+
+
+def check_login(request):
+    if request.user.username:
+        return JsonResponse({'logged_in': True})
+    return JsonResponse({'logged_in': False})
