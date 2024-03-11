@@ -98,7 +98,17 @@ def chosen_game(request, gameID):
                 To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
             """}
     game['description'] = game['description'].splitlines()
-    return render(request, 'chosen_game.html', {'game': game})
+    username = request.user.username
+
+    if request.method == 'POST':
+        review_content = request.POST.get('review-content')
+        print(review_content)
+        # Review.objects.create(reviewText=review_content, game=game, user=request.user) 
+
+    return render(request, 'chosen_game.html', {'game': game, 'username': username})
+    
+    
+
 
 
 def check_login(request):

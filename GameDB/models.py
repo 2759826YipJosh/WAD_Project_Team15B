@@ -45,7 +45,7 @@ class Game(models.Model):
     #idk why this gameID works? I dont think it does we need to look at it - Ryan
     gameID = models.AutoField(primary_key=True)
     gameTitle = models.CharField(max_length=60)
-    releaseDate = models.DateField()
+    releaseDate = models.DateField(null=True)
     #Don't edit these foreign keys once active will break admin page - Ryan
     #categoryName = models.ForeignKey(Category, on_delete=models.CASCADE)
     platform = models.CharField(max_length=20)
@@ -73,6 +73,10 @@ class Review(models.Model):
     #username = models.ForeignKey(User.username)
     #gameTitle = models.ForeignKey(Game.gameTitle)
     #gameID = models.ForeignKey(Game.gameID)
+
+    submissionTime = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.title
