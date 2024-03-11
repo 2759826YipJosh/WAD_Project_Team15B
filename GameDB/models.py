@@ -14,8 +14,6 @@ class UserProfile(models.Model):
 class Category(models.Model):
     NAME_MAX_LENGTH = 20
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -42,12 +40,9 @@ class Page(models.Model):
 
 class Game(models.Model):
     
-    #idk why this gameID works? I dont think it does we need to look at it - Ryan
-    gameID = models.AutoField(primary_key=True)
     gameTitle = models.CharField(max_length=60)
     releaseDate = models.DateField()
-    #Don't edit these foreign keys once active will break admin page - Ryan
-    #categoryName = models.ForeignKey(Category, on_delete=models.CASCADE)
+    categoryName = models.OneToOneField(Category, on_delete=models.CASCADE)
     platform = models.CharField(max_length=20)
     developer = models.CharField(max_length=30)
     publisher = models.CharField(max_length=30)
@@ -64,15 +59,12 @@ class Game(models.Model):
         return self.gameTitle
 
 class Review(models.Model):
-    #doesn't work - Ryan
-    #reviewID = models.AutoField(primary_key=True)
+
     title = models.CharField(max_length=30)
     ratingNum = models.IntegerField()
     reviewText = models.CharField(max_length=1000)
-    #Don't edit these foreign keys once active will break admin page - Ryan
-    #username = models.ForeignKey(User.username)
-    #gameTitle = models.ForeignKey(Game.gameTitle)
-    #gameID = models.ForeignKey(Game.gameID)
+    username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    gameTitle = models.ForeignKey(Game, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.title

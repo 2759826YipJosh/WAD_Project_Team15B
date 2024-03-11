@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Results</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block content %}
     <div class="container mt-5">
-        <h1>Search Results</h1>
+
+        {% if searched %}
+            <h1>You Searched for {{searched}}</h1>
+        {% else %}
+            <h1>Hey! You forgot to search!</h1>
+        {% endif %}
+
         {% for result in results.webPages.value %}
             <div class="card mb-3">
                 <div class="card-body">
@@ -22,5 +25,4 @@
         {% endfor %}
     </div>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}

@@ -31,7 +31,7 @@ urlpatterns = [
     
     path("categories/account/", views.account,  name='account'),
 
-    path("search/", views.search),
+    path("search/", views.search_results, name='search_results'),
 
     path("categories/", views.categories),
     

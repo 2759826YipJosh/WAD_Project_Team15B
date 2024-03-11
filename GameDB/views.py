@@ -57,13 +57,15 @@ def account(request):
     return render(request, 'account.html', {'form': form})
 
 
-def search(request):
-    search_kw = request.GET.get('kw')
-    if search_kw:
-        return HttpResponse(f"Search for: {search_kw}")
+def search_results(request):    
+    #search_kw = request.GET.get('kw')
+    if request.method == "POST":
+        searched = request.POST['searched']
+        return render(request, "search_results.html", {'searched': searched}) #HttpResponse(f"Search for: {search_kw}")
     else:
-        return redirect("/")
-    # return render(request, "06.html")
+        #this is currently always being called no matter the input
+        return render(request, "search_results.html") #redirect("/")
+    
 
 def categories(request):
     if request.method == 'POST' and request.user.is_superuser:
@@ -89,7 +91,7 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-def chosen_game(request, gameID):
+def chosen_game(request, gameTitle):
     # game = Game.objects.get(pk=gameID)
     game = {'videoName': 'deadcells.mp4', 
             'pictureName': 'deadcells.jpg', 
