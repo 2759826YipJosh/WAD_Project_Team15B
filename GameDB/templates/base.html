@@ -17,12 +17,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <form class="d-flex m-auto" method="POST" action="{% url 'search_results' %}" >
+                <form class="d-flex m-auto" method="GET" action="https://www.google.com/search" >
 
-                    {% csrf_token %}
-
-                    <input class="form-control me-2" type="search" placeholder="Search" name ="searched" id="search_input">
-                    <button class="btn btn-primary" type="button" id="search_button">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" name ="q" id="search_input">
+                    <button class="btn btn-primary" type="submit" id="search_button">Search</button>
                 </form>
                 <ul class="navbar-nav ml-auto">
                     {% if username %}

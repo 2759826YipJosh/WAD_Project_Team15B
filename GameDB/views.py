@@ -68,18 +68,7 @@ def search_results(request):
     
 
 def categories(request):
-    if request.method == 'POST' and request.user.is_superuser:
-        category_form = AddCategoryForm(request.POST)
-        game_form = AddGameForm(request.POST)
-        if category_form.is_valid():
-            category_form.save()
-        if game_form.is_valid():
-            game_form.save()
-        return redirect('categories')
-    else:
-        category_form = AddCategoryForm()
-        game_form = AddGameForm()
-    return render(request, 'categories.html', {'category_form': category_form, 'game_form': game_form})
+    return render(request, 'categories.html')
 
 def coming_soon(request):
     return render(request, 'coming_soon.html')
