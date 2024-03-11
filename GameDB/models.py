@@ -42,7 +42,8 @@ class Game(models.Model):
     
     gameTitle = models.CharField(max_length=60)
     releaseDate = models.DateField()
-    categoryName = models.OneToOneField(Category, on_delete=models.CASCADE)
+    #Don't edit these foreign keys once active will break admin page - Ryan
+    #categoryName = models.ForeignKey(Category, on_delete=models.CASCADE)
     platform = models.CharField(max_length=20)
     developer = models.CharField(max_length=30)
     publisher = models.CharField(max_length=30)
@@ -63,8 +64,10 @@ class Review(models.Model):
     title = models.CharField(max_length=30)
     ratingNum = models.IntegerField()
     reviewText = models.CharField(max_length=1000)
-    username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    gameTitle = models.ForeignKey(Game, on_delete=models.CASCADE)
+    #Don't edit these foreign keys once active will break admin page - Ryan
+    #username = models.ForeignKey(User.username)
+    #gameTitle = models.ForeignKey(Game.gameTitle)
+    #gameID = models.ForeignKey(Game.gameID)
     
     def __str__(self):
         return self.title

@@ -1,5 +1,7 @@
 const add_review_btn = document.getElementById('add-review-btn')
 const alert_div_located = document.getElementById('alert-div-located')
+const review_form = document.getElementById('review-form');
+const review_close_btn = document.getElementById('review-close-btn');
 
 add_review_btn.addEventListener('click', (e)=>{
     axios.get('/check_login/')
@@ -14,11 +16,16 @@ add_review_btn.addEventListener('click', (e)=>{
                 `;
                 alert_div_located.appendChild(alert_div);
             } else {
-                alert('already log in')
+                // alert('already log in')
                 // do sth
+                review_form.style.display = 'block';
             }
         })
         .catch(function(error) {
             console.error('Error:', error);
         });
+});
+
+review_close_btn.addEventListener('click', (e)=>{
+    review_form.style.display = 'none';
 });

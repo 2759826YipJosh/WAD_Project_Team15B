@@ -26,12 +26,24 @@
         
     </div>
 
-    <div class="row mt-4">
+    <div class="row mt-5">
         <div class="col-md-3">
             <button type="button" class="btn btn-outline-secondary " id="add-review-btn">Add Review</button>
         </div>
     </div>
     <div class="row mt-4" id="alert-div-located"></div>
+    <div class="row mt-2">
+        <form method="post" style="display: none;" id="review-form">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Your Review" name="review-content">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-danger" type="button" id="review-close-btn">Close</button>
+            </div>
+        </form>
+        
+    </div>
+    <div class="row bg-dark">abc</div>
 
 </div>
 
