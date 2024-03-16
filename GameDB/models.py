@@ -39,7 +39,6 @@ class Page(models.Model):
         return self.title
 
 class Game(models.Model):
-    
     gameTitle = models.CharField(max_length=60)
     releaseDate = models.DateField()
     #Don't edit these foreign keys once active will break admin page - Ryan
@@ -68,6 +67,10 @@ class Review(models.Model):
     #username = models.ForeignKey(User.username)
     #gameTitle = models.ForeignKey(Game.gameTitle)
     #gameID = models.ForeignKey(Game.gameID)
+
+    submissionTime = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.title
