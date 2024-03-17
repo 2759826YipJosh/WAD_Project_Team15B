@@ -1,17 +1,16 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm, UpdateAccountForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Game, Review
-
-
+from django.http import JsonResponse
+from django.db import transaction, IntegrityError
+from .forms import RegisterForm, UpdateAccountForm
+from .models import Game
+import csv
+from decimal import Decimal
 
 def home(request):
     username = request.user.username
-    
-    return render(request, "home.html", {'username': username})
+    return render(request, "home.html", {'username': username, 'path': request.path})
 
 def user_login(request):
     if request.method == 'POST':
@@ -20,14 +19,11 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to a success page.
-            return redirect('home')  # Replace 'home' with the name of your home view
+            return redirect('home') 
         else:
-            # Return an 'invalid login' error message.
             return render(request, 'login.html', {'error': 'Invalid login'})
     else:
-        return render(request, 'login.html')
-    
+        return render(request, 'login.html', {'username': username,'path': request.path})
 
 def register(request):
     if request.method == 'POST':
@@ -36,10 +32,10 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            return redirect('login')  # Redirect to a login page
+            return redirect('login')
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'form': form, 'path': request.path})
 
 def update_account(request):
     if request.method == 'POST':
@@ -50,63 +46,80 @@ def update_account(request):
             return redirect('account')
     else:
         form = UpdateAccountForm(instance=request.user)
-    return render(request, 'account.html', {'form': form})
+    return render(request, 'account.html', {'form': form, 'path': request.path})
 
 def account(request):
     form = UpdateAccountForm(instance=request.user)
-    return render(request, 'account.html', {'form': form})
-
-
-def search_results(request):
-    if request.method == "POST":
-        searched = request.POST['searched']
-        games = Game.objects.filter(
-            Q(gameTitle__icontains=searched) |
-            Q(platform__icontains=searched) |
-            Q(developer__icontains=searched) |
-            Q(publisher__icontains=searched)
-        )
-        return render(request, "search_results.html", {'games': games, 'searched': searched})
-    else:
-        return render(request, "search_results.html")
-    
+    username = request.user.username
+    return render(request, 'account.html', {'username': username,'form': form, 'path': request.path})
 
 def categories(request):
-    return render(request, 'categories.html')
+    username = request.user.username
+    return render(request, 'categories.html', {'username': username,'path': request.path})
 
 def coming_soon(request):
-    return render(request, 'coming_soon.html')
+    username = request.user.username
+    return render(request, 'coming_soon.html', {'username': username,'path': request.path})
 
 def about_us(request):
-    return render(request, 'about_us.html')
+    username = request.user.username
+    return render(request, 'about_us.html', {'username': username,'path': request.path})
 
 def logout_view(request):
     logout(request)
     return redirect('/')
 
-def chosen_game(request, gameID):
-    game = Game.objects.get(pk=gameID)
-    # game = {'videoName': 'deadcells.mp4', 
-    #         'pictureName': 'deadcells.jpg', 
-    #         'description': """
-    #             Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
-    #             To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
-    #         """}
-    # game['description'] = game['description'].splitlines()
-    username = request.user.username
-
-    if request.method == 'POST':
-        review_content = request.POST.get('review-content')
-        print(review_content)
-        Review.objects.create(reviewText=review_content, game=game, user=request.user, ratingNum=3)
-
-    return render(request, 'chosen_game.html', {'game': game, 'username': username})
-    
-    
-
-
-
 def check_login(request):
     if request.user.username:
         return JsonResponse({'logged_in': True})
     return JsonResponse({'logged_in': False})
+
+def import_csv_data():
+    try:
+        with open('data.csv', 'r') as file:
+            reader = csv.reader(file)
+            next(reader)  # Skip the header row
+            for row in reader:
+                try:
+                    with transaction.atomic():
+                        price = row[6].replace('$', '') 
+                        if not price.replace('.', '', 1).isdigit():
+                            print(f"Invalid price for game: {row[0]}")
+                            continue
+                        game = Game(
+                            name=row[0],
+                            release_date=row[1],
+                            category=row[2],
+                            platforms_available=row[3],
+                            developer=row[4],
+                            publisher=row[5],
+                            price=Decimal(price),  
+                            average_rating=row[7],
+                            age_restriction=row[8],
+                            multiplayer=row[9] == 'True',
+                            average_completion_time=row[10],
+                            trailer_link=row[11],
+                            image_link=row[12],
+                            description=row[13]
+                        )
+                        game.save()
+                except IntegrityError:
+                    print(f"Failed to create game: {row[0]}")
+    except FileNotFoundError:
+        print("The file data.csv does not exist.")
+
+def search(request):
+    username = request.user.username
+    query = request.GET.get('q')
+    if query is not None:
+        words = query.split()
+        results = Game.objects.all()
+
+        for word in words:
+            results = results.filter(name__icontains=word)
+
+        results = results[:1]
+    else:
+        results = Game.objects.none()  
+
+    return render(request, 'search_results.html', {'username': username,'results': results, 'path': request.path})

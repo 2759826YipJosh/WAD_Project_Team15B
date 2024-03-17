@@ -17,26 +17,41 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <form class="d-flex m-auto" method="GET" action="https://www.google.com/search" >
-
-                    <input class="form-control me-2" type="search" placeholder="Search" name ="q" id="search_input">
-                    <button class="btn btn-primary" type="submit" id="search_button">Search</button>
+                <form method="GET" action="{% url 'search_results' %}" class="d-flex m-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">  Search</button>
                 </form>
+                
                 <ul class="navbar-nav ml-auto">
-                    {% if username %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'account' %}">Account: {{ username }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
-                        </li>
+                    {% if request.path == '/account' %}
+                        {% if username %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
+                            </li>
+                        {% endif %}
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'login' %}">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
-                        </li>
+                        {% if username %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'account' %}">User: {{ username }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div>

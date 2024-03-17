@@ -4,25 +4,30 @@
 {% block title %}Search Results{% endblock title %}
 
 {% block content %}
-    <div class="container mt-5">
-
-        {% if searched %}
-            <h1>You Searched for {{searched}}</h1>
-        {% else %}
-            <h1>Hey! You forgot to search!</h1>
-        {% endif %}
-
-        {% for result in results.webPages.value %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ result.name }}</h5>
-                    <p class="card-text">{{ result.snippet }}</p>
-                    <a href="{{ result.url }}" class="btn btn-primary" target="_blank">Go to page</a>
-                </div>
+  <div class="container-fluid mt-5">
+    <h1 class="mb-4 text-center">Search Results</h1>
+    {% if results %}
+      <div class="row justify-content-center">
+        {% for game in results %}
+          <div class="col-12 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">{{ game.name }}</h5>
+                <p class="card-text">{{ game.description }}</p>
+                <hr>
+                <p><strong>Category:</strong> {{ game.category }}</p>
+                <p><strong>Developer:</strong> {{ game.developer }}</p>
+                <p><strong>Publisher:</strong> {{ game.publisher }}</p>
+                <p><strong>Price:</strong> ${{ game.price }}</p>
+                <p><strong>Average Rating:</strong> {{ game.average_rating }}</p>
+                <a href="{{ game.trailer_link }}" class="btn btn-primary btn-block" target="_blank">Watch Trailer</a>
+              </div>
             </div>
-        {% empty %}
-            <p>No results found.</p>
+          </div>
         {% endfor %}
-    </div>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      </div>
+    {% else %}
+      <p class="text-center">No results found.</p>
+    {% endif %}
+  </div>
 {% endblock %}

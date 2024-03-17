@@ -31,7 +31,9 @@ urlpatterns = [
     
     path("categories/account/", views.account,  name='account'),
 
-    path("search/", views.search_results, name='search_results'),
+    path("search_results/", views.search, name='search_results'),
+    
+    path("search/", views.search, name='search_results'),
 
     path("categories/", views.categories),
     
@@ -44,8 +46,6 @@ urlpatterns = [
     path("about-us/", views.about_us),
     
     path("home/", views.home),
-
-    path('chosen_game/<int:gameID>', views.chosen_game),
     
     path('account/update/', views.update_account, name='update_account'),
 

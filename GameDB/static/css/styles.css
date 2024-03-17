@@ -1,5 +1,6 @@
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
@@ -11,6 +12,7 @@ header .navigation {
     background-color: #333;
     color: white;
     padding: 10px 20px;
+    transition: all 0.3s ease;
 }
 
 header .navigation .nav-box {
@@ -18,6 +20,7 @@ header .navigation .nav-box {
     margin: 0 10px;
     background: #444;
     border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 header .navigation .nav-box a {
@@ -26,16 +29,7 @@ header .navigation .nav-box a {
     font-weight: bold;
 }
 
-.login-container {
-    background-color: white;
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-
+.login-container,
 .register-container {
     background-color: white;
     width: 300px;
@@ -43,17 +37,13 @@ header .navigation .nav-box a {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: all 0.3s ease;
 }
-/* ADDED REGISTER CONTAINER BUT DOESNT WORK */
-
-
 
 form input[type="text"],
 form input[type="password"],
 form input[type="submit"],
 form input[type="confirm_password"],
-/* confirm password is added - J */
-
 form button {
     margin: 10px 0;
     width: calc(100% - 20px);
@@ -61,17 +51,12 @@ form button {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-form input[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
+form input[type="submit"],
 form button {
-    background-color: #f0ad4e;
+    background-color: #5cb85c;
     color: white;
     border: none;
     cursor: pointer;
@@ -87,6 +72,7 @@ footer {
     padding: 10px;
     background-color: #333;
     color: white;
+    transition: all 0.3s ease;
 }
 
 footer a {
@@ -125,399 +111,43 @@ footer a {
     background-color: #555;
 }
 
-
-
 .game-preview {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: 20px;
 }
 
 .game-image {
-    flex: 0 0 auto; /* Do not grow or shrink, but be automatically sized by the image's width */
+    flex: 0 0 auto;
 }
 
 .game-image img {
-    display: block; /* Remove any default inline spacing */
-    width: auto; /* Will scale the image based on its intrinsic aspect ratio */
-    height: auto; /* Maintain the aspect ratio */
-    max-width: 100%; /* Ensure it is responsive and doesn't overflow its container */
-    max-height: 300px; /* Example fixed max-height for larger screens */
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
 }
 
 .game-description {
-    flex: 1; /* Grow to fill the remaining space */
-    min-width: 0; /* Fixes an issue where flex items don't shrink past content size */
+    flex: 1;
+    min-width: 0;
 }
 
-/* Add a media query for smaller screens where you want the image and text to stack vertically */
 @media (max-width: 768px) {
     .game-preview {
         flex-direction: column;
     }
 
     .game-image, .game-description {
-        flex-basis: 100%; /* Both take full width on smaller screens */
+        flex-basis: 100%;
     }
 }
 
-/* CSS */
 .coming-soon-game img {
-    height: 350px; /* Match the height of the middle image */
-    width: 100%; /* Ensure the width is always 100% of the container */
-    object-fit: contain; /* Cover the area of the container without distorting the image */
-    border-radius: 4px; /* Optional, for rounded corners */
-}
-
-
-/* REVERTED BACK TO OLD SO THAT THE NAVIGATION FOR POPULAR CATEGORIES AND COMING SOON WORK 
-PLEASE REFER TO THIS STYLE CSS IN FUTURE SO THAT ALL OF OUR PAGES LOOK THE SAME */body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
-}
-
-header .navigation {
-    display: flex;
-    justify-content: space-between;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-}
-
-header .navigation .nav-box {
-    padding: 10px;
-    margin: 0 10px;
-    background: #444;
-    border-radius: 5px;
-}
-
-header .navigation .nav-box a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.login-container {
-    background-color: white;
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-
-.register-container {
-    background-color: white;
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-/* ADDED REGISTER CONTAINER BUT DOESNT WORK */
-
-
-
-form input[type="text"],
-form input[type="password"],
-form input[type="submit"],
-form input[type="confirm_password"],
-/* confirm password is added - J */
-
-form button {
-    margin: 10px 0;
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-form input[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button {
-    background-color: #f0ad4e;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover,
-form button:hover {
-    opacity: 0.9;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-}
-
-.search-bar {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-bar form {
-    display: flex;
-}
-
-.search-bar input[type="text"] {
-    margin-right: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
+    height: 350px;
+    width: 100%;
+    object-fit: contain;
     border-radius: 4px;
 }
-
-.search-bar button {
-    padding: 5px 10px;
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-bar button:hover {
-    background-color: #555;
-}
-
-
-
-.game-preview {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.game-image {
-    flex: 0 0 auto; /* Do not grow or shrink, but be automatically sized by the image's width */
-}
-
-.game-image img {
-    display: block; /* Remove any default inline spacing */
-    width: auto; /* Will scale the image based on its intrinsic aspect ratio */
-    height: auto; /* Maintain the aspect ratio */
-    max-width: 100%; /* Ensure it is responsive and doesn't overflow its container */
-    max-height: 300px; /* Example fixed max-height for larger screens */
-}
-
-.game-description {
-    flex: 1; /* Grow to fill the remaining space */
-    min-width: 0; /* Fixes an issue where flex items don't shrink past content size */
-}
-
-/* Add a media query for smaller screens where you want the image and text to stack vertically */
-@media (max-width: 768px) {
-    .game-preview {
-        flex-direction: column;
-    }
-
-    .game-image, .game-description {
-        flex-basis: 100%; /* Both take full width on smaller screens */
-    }
-}
-
-/* CSS */
-.coming-soon-game img {
-    height: 350px; /* Match the height of the middle image */
-    width: 100%; /* Ensure the width is always 100% of the container */
-    object-fit: contain; /* Cover the area of the container without distorting the image */
-    border-radius: 4px; /* Optional, for rounded corners */
-}
-
-
-/* REVERTED BACK TO OLD SO THAT THE NAVIGATION FOR POPULAR CATEGORIES AND COMING SOON WORK 
-PLEASE REFER TO THIS STYLE CSS IN FUTURE SO THAT ALL OF OUR PAGES LOOK THE SAME */body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
-}
-
-header .navigation {
-    display: flex;
-    justify-content: space-between;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-}
-
-header .navigation .nav-box {
-    padding: 10px;
-    margin: 0 10px;
-    background: #444;
-    border-radius: 5px;
-}
-
-header .navigation .nav-box a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.login-container {
-    background-color: white;
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-
-.register-container {
-    background-color: white;
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-/* ADDED REGISTER CONTAINER BUT DOESNT WORK */
-
-
-
-form input[type="text"],
-form input[type="password"],
-form input[type="submit"],
-form input[type="confirm_password"],
-/* confirm password is added - J */
-
-form button {
-    margin: 10px 0;
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-form input[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button {
-    background-color: #f0ad4e;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover,
-form button:hover {
-    opacity: 0.9;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-}
-
-.search-bar {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-bar form {
-    display: flex;
-}
-
-.search-bar input[type="text"] {
-    margin-right: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.search-bar button {
-    padding: 5px 10px;
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-bar button:hover {
-    background-color: #555;
-}
-
-
-
-.game-preview {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.game-image {
-    flex: 0 0 auto; /* Do not grow or shrink, but be automatically sized by the image's width */
-}
-
-.game-image img {
-    display: block; /* Remove any default inline spacing */
-    width: auto; /* Will scale the image based on its intrinsic aspect ratio */
-    height: auto; /* Maintain the aspect ratio */
-    max-width: 100%; /* Ensure it is responsive and doesn't overflow its container */
-    max-height: 300px; /* Example fixed max-height for larger screens */
-}
-
-.game-description {
-    flex: 1; /* Grow to fill the remaining space */
-    min-width: 0; /* Fixes an issue where flex items don't shrink past content size */
-}
-
-/* Add a media query for smaller screens where you want the image and text to stack vertically */
-@media (max-width: 768px) {
-    .game-preview {
-        flex-direction: column;
-    }
-
-    .game-image, .game-description {
-        flex-basis: 100%; /* Both take full width on smaller screens */
-    }
-}
-
-/* CSS */
-.coming-soon-game img {
-    height: 350px; /* Match the height of the middle image */
-    width: 100%; /* Ensure the width is always 100% of the container */
-    object-fit: contain; /* Cover the area of the container without distorting the image */
-    border-radius: 4px; /* Optional, for rounded corners */
-}
-
-
-/* REVERTED BACK TO OLD SO THAT THE NAVIGATION FOR POPULAR CATEGORIES AND COMING SOON WORK 
-PLEASE REFER TO THIS STYLE CSS IN FUTURE SO THAT ALL OF OUR PAGES LOOK THE SAME */

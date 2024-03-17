@@ -45,37 +45,17 @@ class Page(models.Model):
         return self.title
 
 class Game(models.Model):
-    gameTitle = models.CharField(max_length=60)
-    releaseDate = models.DateField()
-    #Don't edit these foreign keys once active will break admin page - Ryan
-    #categoryName = models.ForeignKey(Category, on_delete=models.CASCADE)
-    platform = models.CharField(max_length=20)
-    developer = models.CharField(max_length=30)
-    publisher = models.CharField(max_length=30)
-    avgRating = models.FloatField()
-    ageRating = models.CharField(max_length=4)
+    name = models.CharField(max_length=200)
+    release_date = models.DateField()
+    category = models.CharField(max_length=200)
+    platforms_available = models.CharField(max_length=200)
+    developer = models.CharField(max_length=200)
+    publisher = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=1)
+    age_restriction = models.IntegerField()
     multiplayer = models.BooleanField()
-    avgCompTime = models.TimeField()
-    videoName = models.CharField(max_length=30, null=True, blank=True, unique=True)
-    pictureName = models.CharField(max_length=30, null=True, blank=True, unique=True)
-    description = models.CharField(max_length=1000, null=True, blank=True, unique=True)
-    
-    def __str__(self):
-        return self.gameTitle
-
-class Review(models.Model):
-
-    title = models.CharField(max_length=30)
-    ratingNum = models.IntegerField()
-    reviewText = models.CharField(max_length=1000)
-    #Don't edit these foreign keys once active will break admin page - Ryan
-    #username = models.ForeignKey(User.username)
-    #gameTitle = models.ForeignKey(Game.gameTitle)
-    #gameID = models.ForeignKey(Game.gameID)
-
-    submissionTime = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.title
+    average_completion_time = models.CharField(max_length=200)
+    trailer_link = models.URLField()
+    image_link = models.URLField()
+    description = models.TextField()

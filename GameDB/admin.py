@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from GameDB.models import UserProfile, Category, Page, Game, Review
+from GameDB.models import UserProfile, Category, Page, Game
 
 class GameAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
@@ -41,6 +41,6 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Review, ReviewAdmin)
+#admin.site.register(Review, ReviewAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Page)
