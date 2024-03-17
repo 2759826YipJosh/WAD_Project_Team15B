@@ -47,6 +47,7 @@ class Game(models.Model):
     platform = models.CharField(max_length=20)
     developer = models.CharField(max_length=30)
     publisher = models.CharField(max_length=30)
+    #add price variable here 
     avgRating = models.FloatField()
     ageRating = models.CharField(max_length=4)
     multiplayer = models.BooleanField()
