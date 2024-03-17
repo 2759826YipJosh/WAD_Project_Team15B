@@ -1,6 +1,12 @@
 from django.db import models
+from django.shortcuts import render
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+import csv
+from django.core.management import BaseCommand
+from django.db.models import Q
+from django.shortcuts import render
+
 
 
 class UserProfile(models.Model):
@@ -51,7 +57,6 @@ class Game(models.Model):
     ageRating = models.CharField(max_length=4)
     multiplayer = models.BooleanField()
     avgCompTime = models.TimeField()
-
     videoName = models.CharField(max_length=30, null=True, blank=True, unique=True)
     pictureName = models.CharField(max_length=30, null=True, blank=True, unique=True)
     description = models.CharField(max_length=1000, null=True, blank=True, unique=True)
@@ -71,3 +76,38 @@ class Review(models.Model):
     
     def __str__(self):
         return self.title
+    
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        with open('data.csv', 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader)  # Skip the header row
+            for row in reader:
+                game = Game.objects.create(
+                    gameTitle=row[0],
+                    releaseDate=row[1],
+                    platform=row[2],
+                    developer=row[3],
+                    publisher=row[4],
+                    avgRating=float(row[5]),
+                    ageRating=row[6],
+                    multiplayer=bool(row[7]),
+                    avgCompTime=row[8],
+                    videoName=row[9],
+                    pictureName=row[10],
+                    description=row[11]
+                )
+                
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        results = Game.objects.filter(
+            Q(gameTitle__icontains=query) |
+            Q(platform__icontains=query) |
+            Q(developer__icontains=query) |
+            Q(publisher__icontains=query)
+        )
+    else:
+        results = Game.objects.none()
+
+    return render(request, 'chosen_game.html', {'results': results})

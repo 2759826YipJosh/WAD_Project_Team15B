@@ -57,14 +57,18 @@ def account(request):
     return render(request, 'account.html', {'form': form})
 
 
-def search_results(request):    
-    #search_kw = request.GET.get('kw')
+def search_results(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        return render(request, "search_results.html", {'searched': searched}) #HttpResponse(f"Search for: {search_kw}")
+        games = Game.objects.filter(
+            Q(gameTitle__icontains=searched) |
+            Q(platform__icontains=searched) |
+            Q(developer__icontains=searched) |
+            Q(publisher__icontains=searched)
+        )
+        return render(request, "search_results.html", {'games': games, 'searched': searched})
     else:
-        #this is currently always being called no matter the input
-        return render(request, "search_results.html") #redirect("/")
+        return render(request, "search_results.html")
     
 
 def categories(request):
