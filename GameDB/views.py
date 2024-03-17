@@ -84,21 +84,21 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-def chosen_game(request, gameTitle):
-    # game = Game.objects.get(pk=gameID)
-    game = {'videoName': 'deadcells.mp4', 
-            'pictureName': 'deadcells.jpg', 
-            'description': """
-                Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
-                To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
-            """}
-    game['description'] = game['description'].splitlines()
+def chosen_game(request, gameID):
+    game = Game.objects.get(pk=gameID)
+    # game = {'videoName': 'deadcells.mp4', 
+    #         'pictureName': 'deadcells.jpg', 
+    #         'description': """
+    #             Dead Cells is a rogue-lite, Castlevania-inspired action-platformer, allowing you to explore a sprawling, ever-changing castle… assuming you're able to fight your way past its keepers.
+    #             To beat the game, you'll have to master 2D "souls-lite combat" with the ever-present threat of permadeath looming. No checkpoints. Kill, die, learn, repeat.
+    #         """}
+    # game['description'] = game['description'].splitlines()
     username = request.user.username
 
     if request.method == 'POST':
         review_content = request.POST.get('review-content')
         print(review_content)
-        # Review.objects.create(reviewText=review_content, game=game, user=request.user) 
+        Review.objects.create(reviewText=review_content, game=game, user=request.user, ratingNum=3)
 
     return render(request, 'chosen_game.html', {'game': game, 'username': username})
     
