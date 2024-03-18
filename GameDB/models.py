@@ -59,3 +59,6 @@ class Game(models.Model):
     trailer_link = models.URLField()
     image_link = models.URLField()
     description = models.TextField()
+    
+    def __str__(self):
+        return self.name
