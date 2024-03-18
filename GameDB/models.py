@@ -45,6 +45,7 @@ class Page(models.Model):
         return self.title
 
 class Game(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     release_date = models.DateField()
     category = models.CharField(max_length=200)
