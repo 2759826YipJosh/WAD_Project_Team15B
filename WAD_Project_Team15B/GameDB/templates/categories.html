@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block content %}
+    <div class="container">
+            <h1>Popular Categories</h1>
+            <p>Browse the most popular video game categories.</p>
+        
+        
+        <!-- FPS -->
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <a href="" class="text-white btn btn-dark btn-lg">FPS</a>
+            </div>
+            
+        </div>
+
+
+
+        <!-- THERE TITLES OF EACH GAME ARE NOT LINKS AT THE MOMENT, ONCE RYAN GETS THE SEARCH DONE WE CAN MAKE THESE TITLES INTO LINKS SO 
+            WHEN YOU CLICK ON A GAME IT DISPLAYS THE GAMES INFO-->
+
+        <div class="row mt-3">
+            
+            <div class="col-md-4" id="pc1">
+                <!-- CHANGE LINE BELOW TO HAVE A LINK TO COD -->
+                <a href=""> 
+                    <img src="{% static 'images/COD.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">Call Of Duty Modern Warfare 3</h1>
+            </div>
+
+            <div class="col-md-4">
+                <!-- CHANGE LINE BELOW TO HAVE A LINK TO BF2042 -->
+                <a href="">
+                    <img src="{% static 'images/BF2024.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">Battefield 2042</h1>
+                
+            </div>
+            <div class="col-md-4">
+                <!-- AGAIN BLAH BLAH CHANGE TO HALO -->
+                <a href="">
+                    <img src="{% static 'images/halo.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">Halo Infinite</h1>
+                
+            </div>
+            
+        </div>
+
+        <!-- RPG -->
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <a href="" class="text-white btn btn-dark btn-lg">RPG</a>
+            </div>
+            
+        </div>
+
+        <div class="row mt-3">
+            
+            <div class="col-md-4">
+
+                <!-- AGAIN LINK BELOW CHANGE TO GTA -->
+                <a href="">
+                <img src="{% static 'images/gta5v2.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">GTA 5</h1>
+                            
+            </div>
+
+            <div class="col-md-4">
+                <!-- AGAIN LINK BELOW CHANGE TO RDR2 -->
+                <a href="">
+                <img src="{% static 'images/rd2.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">Red Dead Redemption 2</h1>
+                
+            </div>
+            <div class="col-md-4">
+                <!-- AGAIN AGAIN LINK BELOW CHANGE TO ASSASSINS CREED -->
+                <a href="">
+                <img src="{% static 'images/assassinscreed.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">Assassin's Creed Odyssey</h1>
+                
+            </div>
+            
+        </div>
+
+        <!-- Sport -->
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <a href="" class="text-white btn btn-dark btn-lg">Sport</a>
+            </div>
+            
+        </div>
+
+        <div class="row mt-3">
+            
+            <div class="col-md-4">
+                <!-- LINK BELOW CHANGE TO EA FC -->
+                <a href="">
+                <img src="{% static 'images/EA.jpg' %}" alt="Picture 1" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">EA FC 24</h1>
+                            
+            </div>
+
+            <div class="col-md-4">
+                <!-- OKAY 2ND LAST ONE U GET THE DRILL(CHANGE LINK NBA) -->
+                <a href="">
+                <img src="{% static 'images/nba.jpg' %}" alt="Picture 2" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">NBA 2K24</h1>
+                
+            </div>
+            <div class="col-md-4">
+                <!-- LAST ONE TO F1 23 -->
+                <a href="">
+                <img src="{% static 'images/f123.jpg' %}" alt="Picture 3" class="d-block w-100" style="height: 235px; object-fit: contain; width: 100%;">
+                </a>
+                <h1 class="display-6 text-center">F1 23</h1>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+
+
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/home.js' %}?{% now 'U' %}"></script>
+{% endblock %}

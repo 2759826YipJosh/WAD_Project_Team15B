@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}account{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">My Account</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="mb-1"><strong>Username:</strong></label>
+                            <p id="username">{{ user.username }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1"><strong>Email:</strong></label>
+                            <p id="email">{{ user.email }}</p>
+                        </div>
+                        <div class="form-group">
+                            <button id="update-profile-button" class="btn btn-primary">Update Profile</button>
+                            <button id="change-password-button" class="btn btn-secondary">Change Password</button>
+                        </div>
+
+                        <!-- Update Profile Form -->
+                        <div id="update-profile-form" style="display: none;">
+                            <h4>Update Profile</h4>
+                            <form method="post" action="/account/update/">
+                                {% csrf_token %}
+                                <input type="text" id="new-username" name="new-username" placeholder="New Username">
+                                <input type="email" id="new-email" name="new-email" placeholder="New Email">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                        <!-- Change Password Form -->
+                        <div id="change-password-form" style="display: none;">
+                            <h4>Change Password</h4>
+                            <form method="post" action="{% url 'update_account' %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="password" id="old-password" name="old-password" placeholder="Old Password">
+                                <input type="password" id="new-password" name="new-password" placeholder="New Password">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/account.js' %}?{% now 'U' %}"></script>
+
+{% endblock %}

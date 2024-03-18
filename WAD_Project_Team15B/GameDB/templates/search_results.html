@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block content %}
+  <div class="container-fluid mt-5">
+    <h1 class="mb-4 text-center">Search Results</h1>
+    {% if results %}
+      <div class="row justify-content-center">
+        {% for game in results %}
+          <div class="col-12 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">{{ game.name }}</h5>
+                <p class="card-text">{{ game.description }}</p>
+                <hr>
+                <p><strong>Category:</strong> {{ game.category }}</p>
+                <p><strong>Developer:</strong> {{ game.developer }}</p>
+                <p><strong>Publisher:</strong> {{ game.publisher }}</p>
+                <p><strong>Price:</strong> ${{ game.price }}</p>
+                <p><strong>Average Rating:</strong> {{ game.average_rating }}</p>
+                <a href="{{ game.trailer_link }}" class="btn btn-primary btn-block" target="_blank">Watch Trailer</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center">No results found.</p>
+    {% endif %}
+  </div>
+{% endblock %}

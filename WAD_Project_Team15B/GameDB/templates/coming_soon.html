@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}coming soon{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>Here are some of the biggest games coming soon: </p>
+        <h2>GTA 6</h2>
+        <div class="game-preview">
+            <div class="game-image">
+                <img src="{% static 'images/gta6.jpg' %}" alt="GTA 6 image">
+            </div>
+            <div class="game-description">
+                <p> Title:  Grand Theft Auto VI (GTA 6)</p>
+                <p> Age Rating: 18</p>
+                <p> Description: GTA 6 is one of the most anticipated games in recent history, expected to push the boundaries of open-world gaming. There has been very little information revelaed 
+                    about the story line but here are the things we know so far: 
+                    GTA 6 will have a playable female protagonist - confirming previous reports, it seems she will be Latina and indeed "one of a pair of leading characters in a story influenced by the bank robbers Bonnie and Clyde," as she's shown with a male lover and partner in crime. A playable female protagonist is a first for the Grand Theft Auto series.
+                    It seems she'll be accompanied by a male partner, too.
+                    GTA 6 will be set in a modern day Vice City - a fictional version of Miami and its surrounding locations.
+                </p>
+                <p>Expected Release Date: 2025 </p> 
+                <p>Expected Price: £70 - £100</p> 
+                <p>Platforms Available: PlayStation 5, Xbox Series X/S. No confrimation whether GTA 6 will be available on PC platforms.</p>
+                <p>Trailer: <a href="https://youtu.be/QdBZY2fkU-0?si=3xeMsQbVlj5yHTSL"> GTA 6 Trailer</a> </p>
+            </div>
+        </div>
+
+        <h2>F1 2024</h2>
+        <div class="game-preview">
+            <div class="game-image">
+                <img src="{% static 'images/F1.jpg' %}" alt="F1 2024 image">
+            </div>
+            <div class="game-description">
+                <p> Title: F1 2024</p>
+                <p> Age Rating: 3</p>
+                <p> Description: Alongside the F1 Manager series, the EA Sports F1 game is the officially licenced Formula 1 game for the pinnacle of motorsport. F1 24 will have fully licenced teams, tracks and drivers from the upcoming season.
+
+                    F1 24 will also have all of the 2023 Formula 2 grid, including drivers and teams. The 2024 F2 grid will be added part way through the game's life cycle, like in previous seasons.
+
+                    F1 24 will also see popular offline game modes such as Time Trial, Grand Prix mode and the series' incredible Career Mode "My Team". F1 Online will no doubt see major changes as well, just like we saw with F1 23's F1 World.
+                </p>
+                <p>Expected Release Date: 31st May 2024 </p> 
+                <p>Expected Price: £80 (pre-order price)</p> 
+                <p>Platforms Available: PlayStation 5, Xbox Series X/S</p>
+                <p>Trailer: <a href="https://youtu.be/4rCs87muGjc?si=8Q4bv5ZO1aCH9-rn"> F1 2024 Trailer</a> </p>
+            </div>
+        </div>
+
+        <h2>Star Wars Outlaws</h2>
+        <div class="game-preview">
+            <div class="game-image">
+                <img src="{% static 'images/starwars.jpg' %}" alt="Star Wars image">
+            </div>
+            <div class="game-description">
+                <p> Title: Star Wars Outlaws</p>
+                <p> Age Rating: 16</p>
+                <p> Description: Experience the first-ever open-world Star Wars game, set between the events of The Empire Strikes Back and Return of the Jedi.
+                    Explore distinct planets across the galaxy, both iconic and new. Risk it all as Kay Vess, an emerging scoundrel seeking freedom and the means to start a new life, along with her companion Nix. 
+                    Fight, steal, and outwit your way through the galaxy's crime syndicates as you join the galaxy's most wanted.
+                </p>
+                <p>Expected Release Date: 2024 </p> 
+                <p>Expected Price: £70 </p> 
+                <p>Platforms Available: PlayStation 5, Xbox Series X/S and PC</p>
+                <p>Trailer: <a href="https://youtu.be/ymcpwq1ltQc?si=2gMg4NVDvOIRzod8"> Star Wars Outlaws Trailer</a> </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}  
+
