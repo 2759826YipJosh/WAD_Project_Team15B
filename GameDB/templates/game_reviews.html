@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Reviews for {{ game.name }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+  </form>
+  <hr>
+  <h3>Reviews</h3>
+  {% for review in reviews %}
+  <div>
+    <strong>{{ review.user.username }}</strong> - {{ review.created_at }}
+    <p>{{ review.text }}</p>
+    <p>Rating: {{ review.rating }}</p>
+  </div>
+  {% empty %}
+  <p>No reviews yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

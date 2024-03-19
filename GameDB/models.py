@@ -5,7 +5,13 @@ from django.contrib.auth.models import User
 import csv
 from django.core.management import BaseCommand
 from django.db.models import Q
-from django.shortcuts import render
+
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
+
+
+
+
 
 
 
@@ -62,3 +68,14 @@ class Game(models.Model):
     
     def __str__(self):
         return self.name
+    
+
+class Review(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s review of {self.game.name}"

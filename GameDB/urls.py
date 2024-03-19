@@ -49,5 +49,8 @@ urlpatterns = [
     
     path('account/update/', views.update_account, name='update_account'),
 
-    path('check_login/', views.check_login)
+    path('check_login/', views.check_login),
+
+    path('games/<int:game_id>/reviews/', views.game_reviews, name='game_reviews'),
+
 ]
