@@ -57,7 +57,8 @@ def update_account(request):
 def account(request):
     form = UpdateAccountForm(instance=request.user)
     username = request.user.username
-    return render(request, 'account.html', {'username': username,'form': form, 'path': request.path})
+    user_reviews = Review.objects.filter(user=request.user).order_by('-created_at')  # Get reviews made by the user
+    return render(request, 'account.html', {'username': username,'form': form, 'path': request.path, 'user_reviews': user_reviews})
 
 def categories(request):
     username = request.user.username

@@ -47,8 +47,37 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                    </div>
+                    </div> 
                 </div>
+
+                <p></p>
+                <p></p>
+                <p></p>
+
+                <div class="card">
+                <div class="user-reviews">
+                    <div class="card-header">
+                        <h3 class="mb-0">My Reviews</h3>
+                    </div>
+                    {% if user_reviews %}
+                        <div class="list-group">
+                            {% for review in user_reviews %}
+                                <a href="{% url 'game_reviews' game_id=review.game.id %}" class="list-group-item list-group-item-action" aria-current="true">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ review.game.name }}</h5>
+                                        <small>Reviewed on {{ review.created_at|date:"M d, Y" }}</small>
+                                    </div>
+                                    <p class="mb-1">Rating: {{ review.rating }}</p>
+                                    <p>{{ review.text }}</p>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>You have not made any reviews yet.</p>
+                    {% endif %}
+                </div>
+                </div>
+                
             </div>
         </div>
     </div>
