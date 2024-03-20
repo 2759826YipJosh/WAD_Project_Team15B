@@ -2,6 +2,8 @@ from django import forms
 from GameDB.models import Page, Category
 from django.contrib.auth.models import User
 from GameDB.models import UserProfile
+from .models import Review
+
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,
@@ -59,3 +61,9 @@ class UpdateAccountForm(forms.ModelForm):
         fields = ['username', 'email']
         
         
+class ReviewForm(forms.ModelForm):
+    rating = forms.IntegerField(min_value=1, max_value=10, help_text="Rate the game on a scale of 1 to 10.")
+
+    class Meta:
+        model = Review
+        fields = ['text', 'rating']

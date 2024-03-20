@@ -7,6 +7,12 @@ from .forms import RegisterForm, UpdateAccountForm
 from .models import Game
 import csv
 from decimal import Decimal
+from .forms import ReviewForm
+from .models import Review
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
+
 
 def home(request):
     username = request.user.username
@@ -51,7 +57,8 @@ def update_account(request):
 def account(request):
     form = UpdateAccountForm(instance=request.user)
     username = request.user.username
-    return render(request, 'account.html', {'username': username,'form': form, 'path': request.path})
+    user_reviews = Review.objects.filter(user=request.user).order_by('-created_at')  # Get reviews made by the user
+    return render(request, 'account.html', {'username': username,'form': form, 'path': request.path, 'user_reviews': user_reviews})
 
 def categories(request):
     username = request.user.username
@@ -123,3 +130,19 @@ def search(request):
         results = Game.objects.none()  
 
     return render(request, 'search_results.html', {'username': username,'results': results, 'path': request.path})
+
+@login_required
+def game_reviews(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.game = game
+            review.user = request.user
+            review.save()
+            return redirect('game_reviews', game_id=game.id)
+    else:
+        form = ReviewForm()
+    reviews = Review.objects.filter(game=game).order_by('-created_at')
+    return render(request, 'game_reviews.html', {'game': game, 'form': form, 'reviews': reviews})
