@@ -11,7 +11,7 @@ from .forms import ReviewForm
 from .models import Review
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q 
 
 
 def home(request):
@@ -118,18 +118,21 @@ def import_csv_data():
 def search(request):
     username = request.user.username
     query = request.GET.get('q')
+    category = request.GET.get('category')
+    results = Game.objects.all()
+
     if query is not None:
         words = query.split()
-        results = Game.objects.all()
-
         for word in words:
             results = results.filter(name__icontains=word)
 
-        results = results[:1]
-    else:
-        results = Game.objects.none()  
+    if category != "" and category is not None:
+        results = results.filter(category__icontains=category)
+
+    results = results[:1]
 
     return render(request, 'search_results.html', {'username': username,'results': results, 'path': request.path})
+
 
 @login_required
 def game_reviews(request, game_id):

@@ -21,8 +21,30 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <form method="GET" action="{% url 'search_results' %}" class="d-flex m-auto">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">  Search</button>
+                    <select name="category" id="category">
+                        <option value="">All Categories</option>
+                        <!-- Add your categories here -->
+                        <option value="Survival Horror">Survival Horror</option>
+                        <option value="Action-Adventure">Action-Adventure</option>
+                        <option value="Third-Person Shooter">Third-Person Shooter</option>
+                        <option value="Platformer">Platformer</option>
+                        <option value="Racing">Racing</option>
+                        <option value="First-Person Shooter">First-Person Shooter</option>
+                        <option value="JRPG">JRPG</option>
+                        <option value="Action RPG">Action RPG</option>
+                        <option value="MMORPG">MMORPG</option>
+                        <option value="Tactical RPG">Tactical RPG</option>
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Simulation">Simulation</option>
+                        <option value="Stealth">Stealth</option>
+                        <option value="Fighting">Fighting</option>
+                    </select>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                
+                
+                
                 
                 <ul class="navbar-nav ml-auto">
                     {% if request.path == '/account' %}
