@@ -35,15 +35,15 @@ urlpatterns = [
     
     path("search/", views.search, name='search_results'),
 
-    path("categories/", views.categories),
+    path("categories/", views.categories, name='categories'),
     
     path("home/categories/", views.categories),
     
-    path("comingsoon/", views.coming_soon),
+    path("comingsoon/", views.coming_soon, name = 'coming_soon'),
 
     path("home/comingsoon/", views.coming_soon),
 
-    path("about-us/", views.about_us),
+    path("about-us/", views.about_us, name='about_us'),
     
     path("home/", views.home),
     
