@@ -35,10 +35,10 @@ class AboutUsPageTests(TestCase):
     def test_about_us_names_load(self):
         response = self.client.get(reverse('about_us'))
         charlie_name = '<p> Name: Charlie Lawson</p>'
-        krish_name = '<p> Name: Charlie Lawson</p>'
-        jiayu_name = '<p> Name: Charlie Lawson</p>'
-        josh_name = '<p> Name: Charlie Lawson</p>'
-        ryan_name = '<p> Name: Charlie Lawson</p>'
+        krish_name = '<p> Name: Krish Dokania</p>'
+        jiayu_name = '<p> Name: Jiayu Li</p>'
+        josh_name = '<p> Name: Josh Yip</p>'
+        ryan_name = "<p> Name: Ryan O'Byrne</p>"
         
         self.assertContains(response, charlie_name)
         self.assertContains(response, krish_name)
